@@ -21,7 +21,7 @@ public class BMP_To_Arrays {
 			int[] rgbArray = new int[offset + (imageHeight - startY) * scanSize + (imageWidth - startX)];
 			img.getRGB(startX, startY, imageWidth, imageHeight, rgbArray, offset, scanSize);
 			
-			getImageInfo( imageHeight,  imageWidth,  offset,  scanSize,  startX,  startY);
+//			getImageInfo( imageHeight,  imageWidth,  offset,  scanSize,  startX,  startY);
 //			testChanged(imageHeight, imageWidth, rgbArray, offset, scanSize, startX, startY);
 			
 		}catch(IOException ex){
