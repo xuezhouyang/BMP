@@ -1,0 +1,208 @@
+{
+  "id": "trace_123abc456def789",
+  "timestamp": "2024-11-08T10:30:45.123Z",
+  "name": "Customer Support Chat Session",
+  "userId": "user_987xyz",
+  "sessionId": "session_abc123",
+  "release": "v1.2.3",
+  "version": "production",
+  "public": false,
+  "bookmarked": false,
+  "tags": ["customer-support", "high-priority"],
+  "metadata": {
+    "environment": "production",
+    "region": "us-east-1",
+    "customer_tier": "enterprise"
+  },
+  "input": {
+    "userMessage": "I'm having trouble accessing my account dashboard",
+    "context": {
+      "previousMessages": 3,
+      "userTier": "premium"
+    }
+  },
+  "output": {
+    "response": "I'll help you resolve the dashboard access issue. Let me check your account status.",
+    "actionTaken": "account_diagnostic_initiated"
+  },
+  "totalCost": 0.0234,
+  "totalTokens": 1247,
+  "promptTokens": 856,
+  "completionTokens": 391,
+  "latency": 2340,
+  "observations": [
+    {
+      "id": "obs_root_001",
+      "type": "span",
+      "name": "Chat Session Handler",
+      "startTime": "2024-11-08T10:30:45.123Z",
+      "endTime": "2024-11-08T10:30:47.463Z",
+      "level": "DEFAULT",
+      "statusMessage": "success",
+      "version": "1.0",
+      "metadata": {
+        "handler": "ChatSessionHandler",
+        "priority": "high"
+      },
+      "input": {
+        "userMessage": "I'm having trouble accessing my account dashboard",
+        "userId": "user_987xyz"
+      },
+      "output": {
+        "response": "I'll help you resolve the dashboard access issue. Let me check your account status.",
+        "confidence": 0.95
+      },
+      "children": [
+        {
+          "id": "obs_002",
+          "type": "span",
+          "name": "Intent Classification",
+          "startTime": "2024-11-08T10:30:45.150Z",
+          "endTime": "2024-11-08T10:30:45.320Z",
+          "level": "DEFAULT",
+          "statusMessage": "success",
+          "metadata": {
+            "model": "intent-classifier-v2"
+          },
+          "input": {
+            "text": "I'm having trouble accessing my account dashboard"
+          },
+          "output": {
+            "intent": "technical_support",
+            "category": "account_access",
+            "confidence": 0.97
+          },
+          "latency": 170,
+          "children": []
+        },
+        {
+          "id": "obs_003",
+          "type": "generation",
+          "name": "GPT-4 Response Generation",
+          "startTime": "2024-11-08T10:30:45.350Z",
+          "endTime": "2024-11-08T10:30:46.890Z",
+          "level": "DEFAULT",
+          "statusMessage": "success",
+          "model": "gpt-4-turbo-preview",
+          "modelParameters": {
+            "temperature": 0.7,
+            "maxTokens": 500,
+            "topP": 0.9
+          },
+          "metadata": {
+            "provider": "openai",
+            "region": "us-east"
+          },
+          "input": {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a helpful customer support agent. Provide clear, empathetic responses."
+              },
+              {
+                "role": "user",
+                "content": "I'm having trouble accessing my account dashboard"
+              }
+            ]
+          },
+          "output": {
+            "message": "I'll help you resolve the dashboard access issue. Let me check your account status.",
+            "finishReason": "stop"
+          },
+          "usage": {
+            "promptTokens": 856,
+            "completionTokens": 391,
+            "totalTokens": 1247
+          },
+          "cost": 0.0234,
+          "latency": 1540,
+          "children": []
+        },
+        {
+          "id": "obs_004",
+          "type": "span",
+          "name": "Account Status Check",
+          "startTime": "2024-11-08T10:30:46.900Z",
+          "endTime": "2024-11-08T10:30:47.230Z",
+          "level": "DEFAULT",
+          "statusMessage": "success",
+          "metadata": {
+            "service": "account-service",
+            "endpoint": "/api/v1/account/status"
+          },
+          "input": {
+            "userId": "user_987xyz"
+          },
+          "output": {
+            "accountStatus": "active",
+            "dashboardAccess": "enabled",
+            "lastLogin": "2024-11-07T15:22:10Z"
+          },
+          "latency": 330,
+          "children": [
+            {
+              "id": "obs_005",
+              "type": "span",
+              "name": "Database Query",
+              "startTime": "2024-11-08T10:30:46.920Z",
+              "endTime": "2024-11-08T10:30:47.180Z",
+              "level": "DEBUG",
+              "statusMessage": "success",
+              "metadata": {
+                "query_type": "select",
+                "table": "users"
+              },
+              "input": {
+                "query": "SELECT * FROM users WHERE id = ?",
+                "params": ["user_987xyz"]
+              },
+              "output": {
+                "rowCount": 1,
+                "executionTime": "260ms"
+              },
+              "latency": 260,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "obs_006",
+          "type": "event",
+          "name": "Response Logged",
+          "startTime": "2024-11-08T10:30:47.450Z",
+          "level": "DEFAULT",
+          "statusMessage": "success",
+          "metadata": {
+            "logService": "analytics",
+            "eventType": "support_interaction"
+          },
+          "input": {
+            "sessionId": "session_abc123",
+            "userId": "user_987xyz",
+            "responseGenerated": true
+          },
+          "output": {
+            "logged": true,
+            "eventId": "event_log_789"
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "scores": [
+    {
+      "id": "score_001",
+      "name": "User Satisfaction",
+      "value": 0.92,
+      "source": "ai_prediction",
+      "comment": "High confidence in positive user experience"
+    },
+    {
+      "id": "score_002",
+      "name": "Response Quality",
+      "value": 0.88,
+      "source": "automated_evaluation"
+    }
+  ]
+}

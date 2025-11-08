@@ -1,0 +1,24 @@
+.trace-tree {
+  position: relative;
+}
+
+.observation-wrapper {
+  position: relative;
+}
+
+.children-container {
+  position: relative;
+  margin-left: 24px;
+  border-left: 2px solid #e9ecef;
+  padding-left: 0;
+}
+
+.children-container::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #dee2e6 0%, transparent 100%);
+}
