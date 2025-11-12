@@ -1,0 +1,33 @@
+.App {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #1971c2 0%, #1864ab 100%);
+  color: white;
+  padding: 24px 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.app-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.app-subtitle {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.938rem;
+}
+
+.app-main {
+  max-width: 1600px;
+  margin: 0 auto;
+}

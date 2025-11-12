@@ -1,0 +1,41 @@
+.trace-detail-view {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.trace-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.trace-tree-section,
+.detail-panel-section {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  padding: 20px;
+  overflow: auto;
+  max-height: calc(100vh - 280px);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #212529;
+}
+
+@media (max-width: 1200px) {
+  .trace-content {
+    grid-template-columns: 1fr;
+  }
+
+  .trace-tree-section,
+  .detail-panel-section {
+    max-height: 600px;
+  }
+}
